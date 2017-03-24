@@ -7,7 +7,7 @@ public class ContinuousAttribute extends Attribute {
 	// TODO: override other various methods (e.g. toString()). 
 	
 	@Override
-	public boolean shouldBeChanged() {
+	public boolean shouldBeDiscretized() {
 		return true;
 	}
 	

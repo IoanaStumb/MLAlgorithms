@@ -1,25 +1,43 @@
 package Utils;
 
+import static org.junit.Assert.*;
+
 import java.util.List;
 
+import org.junit.Test;
+
 import Models.Attributes.Attribute;
+import Models.Attributes.AttributeType;
 import Models.Attributes.DiscreteAttribute;
 
 public class DataInitializerTest {
 	
-	public static void main(String[] args) {
+	private boolean attributeListContainsOutputAttribute(List<Attribute> attributes) {
 		
-		DataInitializer di = new DataInitializer();
-		List<Attribute> l = di.initializeAllAttributes("attributes.txt");
-		l.forEach(a -> System.out.println(a.getName()));
-		System.out.println();
-		
-		List<Attribute> li = di.filterInputAttributes(l);
-		li.forEach(a -> System.out.println(a.getName()));
-		System.out.println();
-		
-		DiscreteAttribute oa = di.filterOutputAttribute(l);
-		System.out.println(oa.getName());
+		return attributes.stream().anyMatch(attribute -> attribute.getType().equals(AttributeType.OUTPUT));
 	}
-
+	
+	@Test
+	public void inputAttributesShouldBeFiltered() {
+		
+		DataInitializer initializer = new DataInitializer();
+		List<Attribute> attributes = initializer.initializeAllAttributes("attributes.txt");
+		
+		boolean outputAttribute = attributeListContainsOutputAttribute(initializer.filterInputAttributes(attributes));
+		
+		assertFalse("Attribute list contains an output attribute!", outputAttribute);
+		
+	}
+	
+	@Test
+	public void outputAttributeShouldNotBeNull() {
+		
+		DataInitializer initializer = new DataInitializer();
+		List<Attribute> attributes = initializer.initializeAllAttributes("attributes.txt");
+		
+		DiscreteAttribute outputAttribute = initializer.filterOutputAttribute(attributes);
+		
+		assertNotNull("Output attribute is null!", outputAttribute);
+		
+	}
 }

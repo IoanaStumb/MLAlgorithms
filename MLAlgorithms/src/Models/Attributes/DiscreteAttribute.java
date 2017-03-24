@@ -14,7 +14,7 @@ public class DiscreteAttribute extends Attribute {
 	}
 	
 	@Override
-	public boolean shouldBeChanged() {
+	public boolean shouldBeDiscretized() {
 		return false;
 	}
 	

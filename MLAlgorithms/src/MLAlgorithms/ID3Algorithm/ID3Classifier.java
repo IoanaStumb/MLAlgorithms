@@ -26,14 +26,27 @@ public abstract class ID3Classifier implements TreeClassifier {
 	@Override
 	public Node learn() {
 		
-		// check all attributes type and, if necessary, discretize them
-		List<DiscreteAttribute> inputAttributes = discretizeInputAttributes(inputData.getTrainingInstances(), inputData.getOutputAttribute(), inputData.getInputAttributes());
+		// check input data and, if any data is continuous, discretize it
+		TreeClassifierData discretizedInputData = discretizeInputData(inputData);
 		
-		root = runID3Algorithm(inputData.getTrainingInstances(), inputData.getOutputAttribute(), inputAttributes);
+		List<DiscreteAttribute> inputAttributes = mapDiscreteAttributes(discretizedInputData.getInputAttributes());
+		
+		root = runID3Algorithm(discretizedInputData.getTrainingInstances(), inputData.getOutputAttribute(), inputAttributes);
 		return root;
 	}
 	
-	protected abstract List<DiscreteAttribute> discretizeInputAttributes(List<ClassifiedInstance> instances, DiscreteAttribute outputAttribute, List<Attribute> allInputAttributes);
+	protected abstract TreeClassifierData discretizeInputData(TreeClassifierData inputData);
+	
+	private List<DiscreteAttribute> mapDiscreteAttributes(List<Attribute> inputAttributes) {
+		
+		List<DiscreteAttribute> discreteAttributes = new ArrayList<>();
+		
+		for (Attribute attribute : inputAttributes) {
+			discreteAttributes.add((DiscreteAttribute) attribute);
+		}
+		
+		return discreteAttributes;
+	}
 	
 	private int countClassifiedInstances(String classificationValue, List<ClassifiedInstance> classifiedInstances) {
 		

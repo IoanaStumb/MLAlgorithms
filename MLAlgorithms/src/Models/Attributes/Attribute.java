@@ -19,6 +19,6 @@ public abstract class Attribute {
 		this.type = type;
 	}
 	
-	public abstract boolean shouldBeChanged();
+	public abstract boolean shouldBeDiscretized();
 	
 }
