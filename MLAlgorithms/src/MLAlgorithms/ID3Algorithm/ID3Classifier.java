@@ -75,7 +75,6 @@ public abstract class ID3Classifier implements TreeClassifier {
 		else return secondClassification;
 	}
 	
-	//TODO: test!
 	private List<ClassifiedInstance> getPartitionedInstancesAfterCondition(String attributeValue, List<ClassifiedInstance> instances) {
 		
 		List<ClassifiedInstance> partitionedInstances = new ArrayList<>();
