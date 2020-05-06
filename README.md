@@ -1,4 +1,4 @@
-## Personal project
+# Personal project
 
 **This is a personal project done while studying basic machine learning algorithms.**
 
