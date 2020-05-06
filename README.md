@@ -4,8 +4,6 @@
 
 **It didn't go very far in the end, but was a fun and worthwhile endeavour.**
 
----- 
-
 ## MLAlgorithms
 A Java implementation of some popular ML (Machine Learning) algorithms.
 
